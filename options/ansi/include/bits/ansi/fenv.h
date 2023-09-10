@@ -46,6 +46,21 @@
 #define FE_DOWNWARD 2
 #define FE_UPWARD 3
 
+#elif defined(__i386__)
+
+#define FE_INVALID 1
+#define FE_DIVBYZERO 2
+#define FE_OVERFLOW 4
+#define FE_UNDERFLOW 8
+#define FE_INEXACT 16
+
+#define FE_ALL_EXCEPT 31
+
+#define FE_TONEAREST 0
+#define FE_UPWARD 0x400000
+#define FE_DOWNWARD 0x800000
+#define FE_TOWARDZERO 0xC00000
+
 #else
 #error Unknown architecture
 #endif

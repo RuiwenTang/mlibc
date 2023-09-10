@@ -152,6 +152,14 @@ elif host_machine.system() == 'lyre'
 	rtdl_include_dirs += include_directories('sysdeps/lyre/include')
 	libc_include_dirs += include_directories('sysdeps/lyre/include')
 	subdir('sysdeps/lyre')
+elif host_machine.system() == 'toyos'
+	disable_linux_option = true
+	disable_posix_option = true
+	disable_glibc_option = true
+	disable_bsd_option = true
+	rtdl_include_dirs += include_directories('sysdeps/toyos/include')
+	libc_include_dirs += include_directories('sysdeps/toyos/include')
+	subdir('sysdeps/toyos')
 elif host_machine.system() == 'lemon'
 	rtdl_include_dirs += include_directories('sysdeps/lemon/include')
 	libc_include_dirs += include_directories('sysdeps/lemon/include')
@@ -330,7 +338,7 @@ rtlib_deps = []
 
 if not headers_only
 	if not disable_libgcc_dependency
-		libgcc = meson.get_compiler('c').find_library('gcc', required: false)
+		libgcc = meson.get_compiler('c').find_library('gcc', required: true)
 
 		compiler_rt_name = 'libclang_rt.builtins-' + host_machine.cpu_family()
 		compiler_rt = meson.get_compiler('c').find_library(compiler_rt_name, required: false)

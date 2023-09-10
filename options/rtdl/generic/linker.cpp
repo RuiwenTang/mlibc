@@ -28,6 +28,8 @@ constexpr inline bool tlsAboveTp = false;
 constexpr inline bool tlsAboveTp = true;
 #elif defined(__riscv)
 constexpr inline bool tlsAboveTp = true;
+#elif defined (__i386__)
+constexpr inline bool tlsAboveTp = false;
 #else
 #	error Unknown architecture
 #endif
@@ -172,7 +174,7 @@ SharedObject *ObjectRepository::requestObjectWithName(frg::string_view name,
 		if (path.starts_with("$ORIGIN")) {
 			frg::string_view dirname = origin->path;
 			auto lastsl = dirname.find_last('/');
-			if (lastsl != (uint64_t)-1) {
+			if (lastsl != (size_t)-1) {
 				dirname = dirname.sub_string(0, lastsl);
 			} else {
 				dirname = ".";
